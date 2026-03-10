@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dog API Project</title>
+    <title>Dog API Explorer</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -13,22 +13,23 @@
         <nav>
             <ul class="nav-links">
                 <li><button id="nav-image">Daily Dog Dose</button></li>
-                <li><button id="nav-details">Breed Information</button></li>
+                <li><button id="nav-categories">Dog Categories</button></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="content-area">
-            <div id="loading" class="hidden">Loading...</div>
+            <div id="loading" class="hidden">Fetching doggy data...</div>
+            
             <div id="data-display">
-                <p>Welcome! Select a category above to fetch data from TheDogAPI.</p>
+                <p>Select an option above to explore data from TheDogAPI endpoints!</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Ashley Cherry - Open API Project</p>
+        <p>&copy; 2026 Ashley Cherry | Open API Project</p>
     </footer>
 
     <script src="index.js"></script>

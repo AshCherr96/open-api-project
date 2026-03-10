@@ -33,31 +33,30 @@ async function getDogImage() {
     }
 }
 
-// --- Endpoint 2: Breed Details ---
-// URL: https://api.thedogapi.com/v1/breeds?limit=10
-async function getBreedDetails() {
+// --- Endpoint 2: Dog Categories ---
+// URL: https://api.thedogapi.com/v1/categories
+async function fetchBreedInfo() {
     toggleLoader(true);
     try {
-        // Fetching a list of breeds to show data
-        const response = await fetch('https://api.thedogapi.com/v1/breeds?limit=10');
-        if (!response.ok) throw new Error('Failed to fetch breed data');
+        const response = await fetch('https://api.thedogapi.com/v1/categories');
+        if (!response.ok) throw new Error('Could not fetch categories');
         
-        const breeds = await response.json();
+        const categories = await response.json();
         
-        let html = '<h2>Dog Breed Details</h2><div class="breed-grid">';
-        breeds.forEach(breed => {
-            html += `
-                <div class="breed-card" style="border:1px solid #ddd; padding:10px; margin:10px; border-radius:8px;">
-                    <h3>${breed.name}</h3>
-                    <p><strong>Bred For:</strong> ${breed.bred_for || 'Companion'}</p>
-                    <p><strong>Temperament:</strong> ${breed.temperament}</p>
+        let htmlContent = '<h2>Dog Categories</h2><div class="breed-grid">';
+        // Displaying the categories found in API
+        categories.forEach(cat => {
+            htmlContent += `
+                <div class="breed-card">
+                    <h3>${cat.name}</h3>
+                    <p>Learn more about ${cat.name} dogs in our daily dose!</p>
                 </div>
             `;
         });
-        html += '</div><p>Data fetched from /breeds endpoint.</p>';
-        display.innerHTML = html;
+        htmlContent += '</div><p>Data retrieved from /v1/categories endpoint.</p>';
+        display.innerHTML = htmlContent;
     } catch (error) {
-        display.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        showError("The API requires a key for this list. Try 'Daily Dog Dose' for the free endpoint!");
     } finally {
         toggleLoader(false);
     }
