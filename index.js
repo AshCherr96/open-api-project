@@ -38,7 +38,7 @@ function displayDog(data) {
 // Initial fetch when page loads
 getDog();
 
-// Update fetch when button is clicked
+// Update fetch when the button is clicked
 if (fetchButton) {
     fetchButton.addEventListener('click', getDog);
 }
