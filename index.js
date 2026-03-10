@@ -1,67 +1,68 @@
-// --- Selectors ---
+// --- Elements ---
 const display = document.getElementById('data-display');
 const loader = document.getElementById('loading');
 const btnImage = document.getElementById('nav-image');
-const btnDetails = document.getElementById('nav-details');
+const btnCategories = document.getElementById('nav-categories'); 
 
-// --- Helper: Toggle Loader ---
+// --- Helper Functions ---
 function toggleLoader(show) {
     loader.classList.toggle('hidden', !show);
     if (show) display.innerHTML = '';
 }
 
-// --- Endpoint 1: Random Dog Image ---
-// URL: https://api.thedogapi.com/v1/images/search
-async function getDogImage() {
+function showError(msg) {
+    display.innerHTML = `<p class="error-msg">Error: ${msg}</p>`;
+    toggleLoader(false);
+}
+
+// --- Endpoint 1: Random Image ---
+async function fetchRandomDog() {
     toggleLoader(true);
     try {
         const response = await fetch('https://api.thedogapi.com/v1/images/search');
-        if (!response.ok) throw new Error('Network response was not ok');
-        
+        if (!response.ok) throw new Error('Could not fetch image');
         const data = await response.json();
-        const dogUrl = data[0].url;
-
         display.innerHTML = `
-            <h2>Random Dog Image</h2>
-            <img src="${dogUrl}" alt="A cute dog" style="max-width:100%; border-radius:12px;">
-            <p>Data fetched from /images/search endpoint.</p>
+            <h2>Daily Dog Dose</h2>
+            <img src="${data[0].url}" alt="A cute dog" class="api-image">
+            <p>Fresh data from the /images/search endpoint!</p>
         `;
     } catch (error) {
-        display.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        showError(error.message);
     } finally {
         toggleLoader(false);
     }
 }
 
 // --- Endpoint 2: Dog Categories ---
-// URL: https://api.thedogapi.com/v1/categories
-async function fetchBreedInfo() {
+async function fetchCategories() {
     toggleLoader(true);
     try {
+        // Using the public categories endpoint to avoid API key errors
         const response = await fetch('https://api.thedogapi.com/v1/categories');
         if (!response.ok) throw new Error('Could not fetch categories');
         
         const categories = await response.json();
         
         let htmlContent = '<h2>Dog Categories</h2><div class="breed-grid">';
-        // Displaying the categories found in API
         categories.forEach(cat => {
             htmlContent += `
                 <div class="breed-card">
                     <h3>${cat.name}</h3>
-                    <p>Learn more about ${cat.name} dogs in our daily dose!</p>
+                    <p>Click "Daily Dog Dose" to see a random dog from this or other categories!</p>
                 </div>
             `;
         });
-        htmlContent += '</div><p>Data retrieved from /v1/categories endpoint.</p>';
+        htmlContent += '</div>';
         display.innerHTML = htmlContent;
     } catch (error) {
-        showError("The API requires a key for this list. Try 'Daily Dog Dose' for the free endpoint!");
+        // If categories fails, it's usually an API restriction. 
+        showError("TheDogAPI categories endpoint is currently restricted. Please try again later.");
     } finally {
         toggleLoader(false);
     }
 }
 
-// --- Event Listeners Nav ---
-btnImage.addEventListener('click', getDogImage);
-btnDetails.addEventListener('click', getBreedDetails);
+// --- Event Listeners ---
+btnImage.addEventListener('click', fetchRandomDog);
+btnCategories.addEventListener('click', fetchCategories); 
