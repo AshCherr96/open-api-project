@@ -19,8 +19,8 @@ This project is a technical demonstration of using the **Fetch API** and **Async
 
 Follow these steps to run the project on your machine:
 
-1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/AshCherr96/open-api-project.git](https://github.com/AshCherr96/open-api-project.git)
+1. **Download the Files:** Click the green **Code** button at the top of this repository and select **Download ZIP**, then extract the files to your computer. (Alternatively, use `git clone https://github.com/AshCherr96/open-api-project.git`)
 
-   or just simply download the files on your computer to be able to view them locally.
+2. **Run the Webpage:** Locate the folder on your computer and **double-click the `index.html` file**. This will launch the Dog API Explorer directly in your default web browser. No local server or installation is required.
+
+3. **Interact:** Use the navigation buttons ("Daily Dog Dose" and "Dog Categories") to trigger fresh API requests and explore different dog data.
