@@ -2,13 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dog API Project</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>Dog API Explorer</h1>
-    <button id="fetch-dog">Find a New Dog</button>
-    <div id="dog-data"></div>
+
+    <header>
+        <h1>Dog API Explorer</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><button id="nav-image">Daily Dog Dose</button></li>
+                <li><button id="nav-details">Breed Information</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="content-area">
+            <div id="loading" class="hidden">Loading...</div>
+            <div id="data-display">
+                <p>Welcome! Select a category above to fetch data from TheDogAPI.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ashley Cherry - Open API Project</p>
+    </footer>
+
     <script src="index.js"></script>
 </body>
 </html>
